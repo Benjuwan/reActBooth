@@ -1,7 +1,10 @@
-import { useState } from "react";
-import { PresentationalBtn } from "../presentational/PresentationalBtn";
+/**
+ * Container Component：表象的なコンポーネント（Presentational Component）を包含（import）したコンテナのようにそれを入れて動かすコンポーネント
+*/
 
-// Container Component：表象的なコンポーネント（Presentational Component）を包含（import）したコンテナのようにそれを入れて動かすコンポーネント
+import { useState } from "react";
+import { PresentationalBtn } from "../presentational/PresentationalBtn"; // Presentational Component
+
 export const ContainerBtn = () => {
     // consoleMethod
     const consoleMethod = () => {
