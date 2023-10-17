@@ -1,3 +1,7 @@
+/**
+ * Presentational Component：表象的なコンポーネント
+*/
+
 import { ReactNode, FC } from "react";
 import styled from "styled-components";
 
@@ -7,7 +11,6 @@ type btnProps = {
     anyClassName?: string;
 }
 
-// Presentational Component：表象的なコンポーネント
 export const PresentationalBtn: FC<btnProps> = (props) => {
     const { btnTxt, method, anyClassName } = props;
     return (
