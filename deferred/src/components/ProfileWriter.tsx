@@ -6,6 +6,8 @@ import Users from './Users';
 const ProfileWriter: FC<{ count?: number }> = ({ count = 1 }) => {
   const [username, setUsername] = useState('');
   const [enableDeferred, seteEableDeferred] = useState(false);
+
+  /* useDeferredValue：あらかじめ任意の state 更新における緊急性をマークしておくことで、緊急性の低い更新を必要に応じて遅らせることができる機能。遅延する値（deferedUsename）を適用するコンポーネント（Users）をメモ化して依存配列にその値を入れる必要がある */
   const deferedUsename = useDeferredValue(username);
 
   // const changeUsername = (event: SyntheticEvent) => {
@@ -25,7 +27,9 @@ const ProfileWriter: FC<{ count?: number }> = ({ count = 1 }) => {
     seteEableDeferred(event.target.checked);
   };
 
+  /* 遅延する値（deferedUsename）を適用するコンポーネント（Users）をメモ化して依存配列にその値を入れる必要がある */
   const deferredUsers = useMemo(
+    // フォームテキストを更新するためのレンダリングが優先されて、プロフィール情報の更新のレンダリングが遅延される
     () => <Users username={deferedUsename} count={count} />,
     [deferedUsename, count]
   );
