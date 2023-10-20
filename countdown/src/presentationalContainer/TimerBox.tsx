@@ -2,7 +2,7 @@
  * presentational component：表象コンポーネント（デザイン面）
 */
 
-import type { FC } from 'react';
+import type { ChangeEvent, FC } from 'react';
 import { RepeatClockIcon as ResetIcon } from '@chakra-ui/icons';
 import { Box, Button, Stat, StatLabel, StatNumber } from '@chakra-ui/react';
 
@@ -31,6 +31,13 @@ export const TimerBox: FC<Props> = (props) => {
             >
                 Reset
             </Button>
+            {/* onChange と onClick */}
+            <input style={{ 'width': '100%', 'margin': '1em auto', 'border': '1px solid' }} type="text" onChange={(clickEvent: ChangeEvent<HTMLInputElement>) => {
+                console.log(`onChange：ChangeEvent：${clickEvent.currentTarget.value}`);
+            }} />
+            <input style={{ 'width': '100%', 'margin': '1em auto', 'border': '1px solid' }} type="text" onClick={(clickEvent: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+                console.log(`onClick：React.MouseEvent：${clickEvent.currentTarget.value}`);
+            }} />
         </Box>
     );
 }
