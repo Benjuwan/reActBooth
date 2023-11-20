@@ -32,7 +32,7 @@ export const TimerBox: FC<Props> = (props) => {
                 Reset
             </Button>
             {/* onChange と onClick */}
-            <input style={{ 'width': '100%', 'margin': '1em auto', 'border': '1px solid' }} type="text" onChange={(clickEvent: ChangeEvent<HTMLInputElement>) => {
+            <input style={{ 'width': '100%', 'margin': '1em auto', 'border': '1px solid' }} type="text" onInput={(clickEvent: ChangeEvent<HTMLInputElement>) => {
                 console.log(`onChange：ChangeEvent：${clickEvent.currentTarget.value}`);
             }} />
             <input style={{ 'width': '100%', 'margin': '1em auto', 'border': '1px solid' }} type="text" onClick={(clickEvent: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
