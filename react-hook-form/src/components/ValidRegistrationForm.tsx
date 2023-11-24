@@ -1,4 +1,4 @@
-import type { FC, SyntheticEvent } from 'react';
+import { useState, type FC, type SyntheticEvent, ChangeEvent } from 'react';
 import { Box, Button, ButtonGroup, Checkbox, FormControl, FormErrorMessage, FormLabel, Input, Select } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -36,6 +36,19 @@ export const ValidRegistrationForm: FC = () => {
     };
 
 
+    const [isInputTxt, setInputTxt] = useState<string>('');
+    const inputTxt = (inputEl: HTMLInputElement) => {
+        setInputTxt((_prevInputTxt) => inputEl.value);
+    }
+    const inputStyle: object = {
+        "display": "block",
+        "width": "100%",
+        "border": '1px solid #333',
+        "border-radius": "4px",
+        "margin": "1em auto",
+        "paddingLeft": ".25em"
+    }
+
     /**
      * Chakra UI を併用するときに気をつけないといけないのはフォーム項目を <FormControl> で囲み、エラーがあるときはその isInvalid 属性を true にしておくこと。そうしないとエラーメッセージの表示や自動フォーカスの機能がうまく働かない
     */
@@ -51,6 +64,11 @@ export const ValidRegistrationForm: FC = () => {
                     <Input size="md" {...register('username')} />
                     <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
                 </FormControl>
+
+                <input style={inputStyle} type="text" value={isInputTxt} onInput={(inputEl: ChangeEvent<HTMLInputElement>) => {
+                    inputTxt(inputEl.currentTarget);
+                }} />
+                {isInputTxt.length >= 0 && <p>{isInputTxt}</p>}
 
                 <FormControl isInvalid={errors.zipcode !== undefined}>
                     <FormLabel htmlFor="zipcode" mt={4}>
