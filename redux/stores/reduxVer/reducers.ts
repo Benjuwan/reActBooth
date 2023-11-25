@@ -7,6 +7,7 @@ export interface CounterState {
 }
 export const initialState: CounterState = { count: 0 };
 
+// Reducer 純粋関数でオブジェクトを返す
 export const counterReducer: Reducer<CounterState, CounterAction> = (
   state = initialState,
   action
