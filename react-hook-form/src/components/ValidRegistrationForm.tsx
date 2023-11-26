@@ -44,7 +44,7 @@ export const ValidRegistrationForm: FC = () => {
         "display": "block",
         "width": "100%",
         "border": '1px solid #333',
-        "border-radius": "4px",
+        "borderRadius": "4px",
         "margin": "1em auto",
         "paddingLeft": ".25em"
     }
