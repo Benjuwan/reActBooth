@@ -24,7 +24,7 @@ export const ValidRegistrationForm: FC = () => {
             username: '',
             isAgreed: false,
         },
-        // resolver:外部バリデーションライブラリを利用するためのカスタムリゾルバを設定する。
+        // resolver：外部バリデーションライブラリを利用するためのカスタムリゾルバを設定する（Yupを指定）。
         resolver: yupResolver(regFormSchema),
     });
 
