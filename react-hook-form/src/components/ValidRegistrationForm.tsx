@@ -28,10 +28,15 @@ export const ValidRegistrationForm: FC = () => {
         resolver: yupResolver(regFormSchema),
     });
 
+    /**
+     * フォーム送信時にその内容をコンソールにダンプする処理を onSubmit 関数として用意
+     * 受け取った handleSubmit 関数にその onSubmit 関数を実行させる処理をフォームの onSubmit イベントに仕込む
+    */
     const onSubmit: SubmitHandler<RegFormSchema> = (data) => console.log(data);
 
+    /* リセットボタンの onClick イベント（reset 関数を実行）*/
     const onReset = (e: SyntheticEvent) => {
-        e.stopPropagation();
+        e.stopPropagation(); // 親・祖先要素のクリックイベント発生を防止
         reset();
     };
 
