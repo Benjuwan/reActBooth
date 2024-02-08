@@ -1,12 +1,22 @@
 import { useState, type FC, type SyntheticEvent, ChangeEvent } from 'react';
-import { Box, Button, ButtonGroup, Checkbox, FormControl, FormErrorMessage, FormLabel, Input, Select } from '@chakra-ui/react';
+import {
+    Box,
+    Button,
+    ButtonGroup,
+    Checkbox,
+    FormControl,
+    FormErrorMessage,
+    FormLabel,
+    Input,
+    Select
+} from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
 
 import { genderCode } from './RegistrationForm';
-import { regFormSchema } from '../schamas/registrationForm';
-import type { SubmitHandler } from 'react-hook-form';
-import type { RegFormSchema } from '../schamas/registrationForm';
+import { regFormSchema } from '../schamas/registrationForm'; // 定義したスキーマオブジェクト
+import type { RegFormSchema } from '../schamas/registrationForm'; // 定義したスキーマオブジェクト（regFormSchema）から型を推論
 
 
 /* npm add yup @hookform/resolvers */
@@ -17,15 +27,13 @@ export const ValidRegistrationForm: FC = () => {
         register,
         handleSubmit,
         reset,
-        // registrationForm.ts で指定した入力値のバリデーションエラー情報が入る
-        formState: { errors },
+        formState: { errors }, // src/schamas/registrationForm.ts で指定した入力値のバリデーションエラー情報が入る
     } = useForm<RegFormSchema>({
         defaultValues: {
             username: '',
             isAgreed: false,
         },
-        // resolver：外部バリデーションライブラリを利用するためのカスタムリゾルバを設定する（Yupを指定）。
-        resolver: yupResolver(regFormSchema),
+        resolver: yupResolver(regFormSchema), // resolver：外部バリデーションライブラリを利用するためのカスタムリゾルバを設定する（Yupを指定）
     });
 
     /**
@@ -63,6 +71,7 @@ export const ValidRegistrationForm: FC = () => {
             <form onSubmit={handleSubmit(onSubmit)} action="/hoge">
 
                 <FormControl isInvalid={errors.username !== undefined} isRequired>
+                    {/* mt={2}, my={6} は chakra-ui による余白のスタイル指定 */}
                     <FormLabel htmlFor="username" mt={2}>
                         ユーザー名
                     </FormLabel>
@@ -72,15 +81,13 @@ export const ValidRegistrationForm: FC = () => {
 
                 <input style={inputStyle} type="text" value={isInputTxt} onInput={(inputEl: ChangeEvent<HTMLInputElement>) => {
                     inputTxt(inputEl.currentTarget);
-                }} />
+                }} placeholder='noValidate_Dammy_EntryForm' />
                 {isInputTxt.length >= 0 && <p>{isInputTxt}</p>}
 
                 <FormControl isInvalid={errors.zipcode !== undefined}>
                     <FormLabel htmlFor="zipcode" mt={4}>
                         郵便番号
                     </FormLabel>
-
-                    {/* ここで設定できる maxLength はあくまでバリデーションのためのもの */}
                     <Input size="md" maxLength={7} {...register('zipcode')} />
                     <FormErrorMessage>{errors.zipcode?.message}</FormErrorMessage>
                 </FormControl>

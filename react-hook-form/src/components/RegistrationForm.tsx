@@ -1,5 +1,4 @@
-import type { FC, ChangeEvent, SyntheticEvent } from 'react';
-import { useState } from 'react';
+import type { FC, SyntheticEvent } from 'react';
 import {
   Box,
   Button,
@@ -13,7 +12,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 
 // const genderCode = {
-/* registrationForm.ts で使用するため export */
+/* src/schamas/registrationForm.ts で使用するため export */
 export const genderCode = {
   f: '女性',
   m: '男性',
@@ -35,6 +34,7 @@ type FormData = {
 
 
 export const NoValidateRegistrationForm: FC = () => {
+  /* ---------【React Hook Form】を使わない場合の記述 --------- */
   // const [formData, setFormData] = useState<FormData>({
   //   username: '',
   //   isAgreed: false,
@@ -51,6 +51,7 @@ export const NoValidateRegistrationForm: FC = () => {
     }
   });
 
+  /* ---------【React Hook Form】を使わない場合の記述 --------- */
   // const handleSubmit = (event: SyntheticEvent) => {
   //   event.preventDefault();
   //   console.log(formData);
@@ -61,11 +62,11 @@ export const NoValidateRegistrationForm: FC = () => {
   }
 
   const onReset = (event: SyntheticEvent) => {
-    /* onClickイベント実行時のバブリングに伴う親のイベント発火を防止 */
-    event.stopPropagation();
+    event.stopPropagation(); // onClickイベント実行時のバブリングに伴う親のイベント発火を防止
     reset();
   }
 
+  /* ---------【React Hook Form】を使わない場合の記述 --------- */
   // const handleChange = (
   //   event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   // ) => {
@@ -79,13 +80,15 @@ export const NoValidateRegistrationForm: FC = () => {
 
   return (
     <Box p={3} w="md" borderWidth="1px" borderRadius="lg" boxShadow="base">
+      {/* ---------【React Hook Form】を使わない場合の記述 --------- */}
       {/* <form onSubmit={handleSubmit}> */}
 
-      {/* handleSubmit：引数として関数を受け取り、フォームが送信されたときにフォームデータをその関数に渡して実行する高階関数（高階関数：関数を引数に取ったり、関数を戻り値として返したりする）*/}
       <form onSubmit={handleSubmit(onSubmit)} action='/hoge'>
         <FormLabel htmlFor="username" mt={2}>
           ユーザー名
         </FormLabel>
+
+        {/* ---------【React Hook Form】を使わない場合の記述 --------- */}
         {/* <Input
           name="username"
           size="md"
@@ -93,15 +96,14 @@ export const NoValidateRegistrationForm: FC = () => {
           onChange={handleChange}
         /> */}
 
-        {/* register：この関数の戻り値には ref のプロパティが含まれてる。それを展開してフォーム要素の属性として与えることで、非制御コンポーネントとして対応するリアル DOM を React Hook Form が管理下に置く */}
         <Input size="md" {...register('username')} />
 
         <FormLabel htmlFor="zipcode" mt={4}>
           郵便番号
         </FormLabel>
-        {/* ここで設定できる maxLength はあくまでバリデーションのためのもの */}
         <Input size="md" maxLength={7} {...register('zipcode')} />
 
+        {/* ---------【React Hook Form】を使わない場合の記述 --------- */}
         {/* <Select
           name="gender"
           my={6}
@@ -109,6 +111,7 @@ export const NoValidateRegistrationForm: FC = () => {
           value={formData.gender}
           onChange={handleChange}
         > */}
+
         <Select my={6} placeholder="性別を選択…" {...register('gender')}>
 
           {Object.entries(genderCode).map(([code, name]) => (
@@ -118,24 +121,21 @@ export const NoValidateRegistrationForm: FC = () => {
           ))}
         </Select>
 
+        {/* ---------【React Hook Form】を使わない場合の記述 --------- */}
         {/* <Checkbox
           name="isAgreed"
           isChecked={formData.isAgreed}
           onChange={handleChange}
         > */}
-        <Checkbox {...register('isAgreed')}>
 
-          規約に同意する
-        </Checkbox>
+        <Checkbox {...register('isAgreed')}>規約に同意する</Checkbox>
         <ButtonGroup my={3} w="xs">
-          {/* <Button w="30%" colorScheme="orange" variant="solid" type="reset"> */}
-          <Button w="30%" colorScheme="orange" variant="solid" onClick={onReset}>
 
-            リセット
-          </Button>
-          <Button w="70%" colorScheme="blue" variant="solid" type="submit">
-            送信
-          </Button>
+          {/* ---------【React Hook Form】を使わない場合の記述 --------- */}
+          {/* <Button w="30%" colorScheme="orange" variant="solid" type="reset"> */}
+
+          <Button w="30%" colorScheme="orange" variant="solid" onClick={onReset}>リセット</Button>
+          <Button w="70%" colorScheme="blue" variant="solid" type="submit">送信</Button>
         </ButtonGroup>
       </form>
     </Box>
