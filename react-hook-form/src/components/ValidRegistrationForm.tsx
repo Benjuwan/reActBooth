@@ -71,7 +71,7 @@ export const ValidRegistrationForm: FC = () => {
             <form onSubmit={handleSubmit(onSubmit)} action="/hoge">
 
                 <FormControl isInvalid={errors.username !== undefined} isRequired>
-                    {/* mt={2}, my={6} は chakra-ui による余白のスタイル指定 */}
+                    {/* mt={2}, my={6} などは chakra-ui による余白のスタイル指定 */}
                     <FormLabel htmlFor="username" mt={2}>
                         ユーザー名
                     </FormLabel>
